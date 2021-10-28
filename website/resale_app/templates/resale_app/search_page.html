@@ -1,0 +1,11 @@
+
+<h1>Welcome! This will be the main search page</h1>
+
+
+<form action="./search_result/", method="post">
+    {% csrf_token %}
+    <div class="fieldWrapper">
+        {{ search_form.as_p }} 
+    </div>
+    <input type="submit" value="Submit">
+</form>
