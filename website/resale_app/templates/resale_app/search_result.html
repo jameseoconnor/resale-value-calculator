@@ -1,13 +1,17 @@
 <!-- templates/search_results.html -->
-<a href="{% url 'search_page' %}">Back to search</a>
+<button><a href="{% url 'search_page' %}">Back to search</a></button>
 
 <h1>Search Results</h1>
 
 <ul>
-  <p>Number of items analysed: {{ total_results }} </p>
-  <p>Average Resell Price: {{ avg_sale_price}} </p>
-  <p>Resell Price Range: {{ range_sale_price }} </p>
-  <p>Average List Price Reduction: {{ avg_list_price_reduction}} </p>
+  <p>Number of re-sold {{garment_brand|title }} {{ garment_category }} items analysed: {{ total_results }} </p>
+  <p>Average re-sell price: {{ avg_sale_price}} </p>
+  {% if avg_sale_price_new %}
+  <p>If the item is new, the average resell price goes to {{ avg_sale_price_new }}</p>
+  {% endif %}
+  <p>Resell price range: {{ range_sale_price }} </p>
+  <p>Sellers usually reduce the price on average by {{ avg_list_price_reduction}} </p>
+  <p>80% of {{garment_brand|title }} {{ garment_category }} resell for at least {{ eighty_percent_category}} </p>
 </ul>
 
 <canvas id="myChart" width="100" height="20"></canvas>
@@ -47,20 +51,6 @@ const myChart = new Chart(ctx, {
                 beginAtZero: true
             }
         }
-    },
-    annotation: {
-      annotations: [{
-        type: 'line',
-        mode: 'vertical',
-        scaleID: 'y-axis-0',
-        value: 30,
-        borderColor: 'rgb(75, 192, 192)',
-        borderWidth: 400,
-        label: {
-          enabled: true,
-          content: 'Test label'
-        }
-      }]
     }
 });
 </script>

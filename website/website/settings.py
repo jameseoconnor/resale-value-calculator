@@ -26,13 +26,13 @@ SECRET_KEY = 'django-insecure-c5qwy*ui-smhpaw087qbh!7#wxxsvw4uc0p&!k!dv2v34+s_^8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'resale_app.apps.ResaleAppConfig',
+    'resale_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -82,11 +82,31 @@ WSGI_APPLICATION = 'website.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, '../db/sold_items.db'),
+#    }
+# }
+
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.sqlite3',
-       'NAME': os.path.join(BASE_DIR, '../db/sold_items.db'),
-   }
+
+    'default': {
+
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+        'NAME': 'resale_app',
+
+        'USER': 'joconnor',
+
+        'PASSWORD': 'james_password',
+
+        'HOST': 'localhost',    
+
+        'PORT': '5432',
+
+    }
+
 }
 
 
