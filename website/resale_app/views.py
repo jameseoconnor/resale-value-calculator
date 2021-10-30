@@ -45,7 +45,7 @@ def search_result(request):
             range_sale_price = calc.calculate_range_sale_price(data)
             avg_list_price_reduction = calc.calculate_avg_list_price_reduction(data)
             eighty_percent_category = calc.calculate_eighty_percent(data)
-            # avg_sale_price_new = calc.calculate_average_sale_price(data_nwt)
+            avg_sale_price_new = calc.calculate_average_sale_price(data_nwt)
 
             context = {
                 "garment_brand": garment_brand,
@@ -56,7 +56,7 @@ def search_result(request):
                 "range_sale_price": range_sale_price,
                 "avg_list_price_reduction": avg_list_price_reduction,
                 "eighty_percent_category": eighty_percent_category,
-                # "avg_sale_price_new": avg_sale_price_new
+                "avg_sale_price_new": avg_sale_price_new
             }
 
         else:
