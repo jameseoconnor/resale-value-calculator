@@ -1,1 +1,1 @@
-## A Django projecdt to calculat the resale value range of clothing 
+## A Django projecdt to calculate the resale value range of clothing 
