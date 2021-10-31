@@ -97,7 +97,7 @@ DATABASES = {
 
         'NAME': 'resale_app',
 
-        'USER': 'joconnor',
+        'USER': 'postgres',
 
         'PASSWORD': 'james_password',
 
