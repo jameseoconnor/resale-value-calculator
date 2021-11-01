@@ -1,11 +1,31 @@
+{% extends "resale_app/base.html" %} {% block content %}
 
-<h1>Welcome! This will be the main search page</h1>
 
-
-<form action="./search_result/", method="post">
-    {% csrf_token %}
-    <div class="fieldWrapper">
-        {{ search_form.as_p }} 
+<!-- <form action="./search_result/", method="post"> -->
+<div class="row justify-content-md-center">
+    <div class="col-10">
+        <h1>Find the best sale price for your pre-loved clothes</h1>
     </div>
-    <input type="submit" value="Submit">
-</form>
+</div>
+<div class="row justify-content-md-center">
+    <div class="col-6">
+        <form action="#" , method="post">
+            {% csrf_token %}
+            <input type="search" id="brand_search" list="available_brands" class="form-control" placeholder="Type brand" aria-label="Search" />
+            <datalist id="available_brands">
+                    <select name="available_brands">
+                    {% for brand in available_brands %}
+                    <option>{{ brand.brand_name|title }}</option>
+                    {% endfor %}
+                    </select>
+                    <br>
+            </datalist>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+<!-- <div class="fieldWrapper">
+            {{ search_form.as_p }} 
+        </div>

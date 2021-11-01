@@ -1,7 +1,10 @@
+{% extends "resale_app/base.html" %}
+
+{% block content %} 
 <!-- templates/search_results.html -->
 <button><a href="{% url 'search_page' %}">Back to search</a></button>
 
-<h1>Search Results</h1>
+<h1>Here is how much your item could be worth</h1>
 
 <ul>
   <p>Number of re-sold {{garment_brand|title }} {{ garment_category }} items analysed: {{ total_results }} </p>
@@ -17,6 +20,7 @@
 <canvas id="myChart" width="100" height="20"></canvas>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
 <script>
 const ctx = document.getElementById('myChart').getContext('2d');
@@ -54,4 +58,4 @@ const myChart = new Chart(ctx, {
     }
 });
 </script>
- 
+{% endblock %}

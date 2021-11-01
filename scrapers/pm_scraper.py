@@ -56,11 +56,11 @@ def get_value_from_html(html, tag_type, class_name, tag_attrib=None, str_replace
 
 # URL Variables
 base_url = "https://poshmark.com"
-brand = 'Luis_Vuitton'
-gender = "Women"
-category = "Shoes"
+brand = 'Patagonia'
+gender = "Men"
+category = "Shirts"
 query_filter = "?availability=sold_out"
-page_limit = 1
+page_limit = 4
 
 
 for i in range(page_limit):

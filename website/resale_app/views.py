@@ -5,10 +5,13 @@ from .models import SoldItemsWomen
 from .forms import SearchForm
 from . import calculations as calc
 
+ 
 def search_page(request):
+    available_brands = SoldItemsWomen.objects.values('brand_name').distinct()
     search_form = SearchForm()
     
     context = {
+        "available_brands": available_brands,
         "search_form": search_form
     }
     return render(request, 'resale_app/search_page.html', context)
