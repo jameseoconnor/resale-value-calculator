@@ -11,7 +11,7 @@ from sqlalchemy import create_engine, text
 
 db_address = 'localhost'
 db_port = 5432
-db_user = 'joconnor'
+db_user = 'postgres'
 db_password = 'james_password'
 db_name = 'resale_app'
 postgres_str = (f'postgresql://{db_user}:{db_password}@{db_address}:{db_port}/{db_name}')
@@ -131,7 +131,7 @@ for i in range(page_limit):
                 )
 
         except Exception as e: 
-#             print(e)
+            print(e)
             continue
 
 
