@@ -1,61 +1,80 @@
-{% extends "resale_app/base.html" %}
-
-{% block content %} 
+{% extends "resale_app/base.html" %} {% block content %}
 <!-- templates/search_results.html -->
-<button><a href="{% url 'search_page' %}">Back to search</a></button>
 
-<h1>Here is how much your item could be worth</h1>
+<div class="row justify-content-md-center m-5">
+  <div class="d-flex justify-content-center">
+    <h1>Here is how much your item could be worth!</h1>
+  </div>
+</div>
+
+{% if search_result %}
+<p>{{ search_result }}</p>
+{% endif %}
 
 <ul>
-  <p>Number of re-sold {{garment_brand|title }} {{ garment_category }} items analysed: {{ total_results }} </p>
-  <p>Average re-sell price: {{ avg_sale_price}} </p>
+  <p>
+    Number of re-sold {{garment_brand|title }} {{ garment_category }} items
+    analysed: {{ total_results }}
+  </p>
+  <p>Average re-sell price: {{ avg_sale_price}}</p>
   {% if avg_sale_price_new %}
-  <p>If the item is new, the average resell price goes to {{ avg_sale_price_new }}</p>
+  <p>
+    If the item is new, the average resell price goes to {{ avg_sale_price_new
+    }}
+  </p>
   {% endif %}
-  <p>Resell price range: {{ range_sale_price }} </p>
-  <p>Sellers usually reduce the price on average by {{ avg_list_price_reduction}} </p>
-  <p>80% of {{garment_brand|title }} {{ garment_category }} resell for at least {{ eighty_percent_category}} </p>
+  <p>Resell price range: {{ range_sale_price }}</p>
+  <p>
+    Sellers usually reduce the price on average by {{ avg_list_price_reduction}}
+  </p>
+  <p>
+    80% of {{garment_brand|title }} {{ garment_category }} resell for at least
+    {{ eighty_percent_category}}
+  </p>
 </ul>
 
 <canvas id="myChart" width="100" height="20"></canvas>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"
+  integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<a href="{% url 'search_page' %}"><button class="btn btn-dark btn-lg mt-2 next">New Search</button></a>
 
 <script>
-const ctx = document.getElementById('myChart').getContext('2d');
-const myChart = new Chart(ctx, {
+  const ctx = document.getElementById('myChart').getContext('2d');
+  const myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: {{ graph_data }},
-        datasets: [{
-            data: {{ graph_data }},
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
+      labels: {{ graph_data }},
+  datasets: [{
+    data: {{ graph_data }},
+    backgroundColor: [
+    'rgba(255, 99, 132, 0.2)',
+    'rgba(54, 162, 235, 0.2)',
+    'rgba(255, 206, 86, 0.2)',
+    'rgba(75, 192, 192, 0.2)',
+    'rgba(153, 102, 255, 0.2)',
+    'rgba(255, 159, 64, 0.2)'
+  ],
+    borderColor: [
+    'rgba(255, 99, 132, 1)',
+    'rgba(54, 162, 235, 1)',
+    'rgba(255, 206, 86, 1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgba(255, 159, 64, 1)'
+  ],
+    borderWidth: 1
+          }]
+      },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
     }
-});
+  }
+  });
 </script>
 {% endblock %}

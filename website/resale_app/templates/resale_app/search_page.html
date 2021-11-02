@@ -1,31 +1,84 @@
 {% extends "resale_app/base.html" %} {% block content %}
 
+<style>
+    /* Hide all except first fieldset*/
 
-<!-- <form action="./search_result/", method="post"> -->
-<div class="row justify-content-md-center">
-    <div class="col-10">
-        <h1>Find the best sale price for your pre-loved clothes</h1>
+    #search fieldset:not(:first-of-type) {
+        display: none;
+    }
+</style>
+
+<div class="row justify-content-md-center m-5">
+    <div class="d-flex justify-content-center">
+        <h1>Find the best resale price for your pre-loved clothes!</h1>
     </div>
 </div>
-<div class="row justify-content-md-center">
-    <div class="col-6">
-        <form action="#" , method="post">
-            {% csrf_token %}
-            <input type="search" id="brand_search" list="available_brands" class="form-control" placeholder="Type brand" aria-label="Search" />
-            <datalist id="available_brands">
-                    <select name="available_brands">
+
+<form id="search" action="./search_result/" , method="post">
+    {% csrf_token %}
+    <div class="row justify-content-md-center m-10 form-inline">
+        <div class="col-sm-6">
+            <fieldset>
+                <input type="search" name="brand" id="brand_search" list="available_brands"
+                    class="form-control form-control-lg" placeholder="Search Brands.." aria-label="Search" />
+                <datalist id="available_brands">
                     {% for brand in available_brands %}
-                    <option>{{ brand.brand_name|title }}</option>
+                    <option>{{ brand.brand_name }}</option>
                     {% endfor %}
-                    </select>
-                    <br>
-            </datalist>
-        </form>
+                </datalist>
+                <input type="button" class="btn btn-dark btn-lg mt-2 next" value="Next" />
+            </fieldset>
+            <fieldset>
+                <input type="search" name="category" id="category_search" list="available_categories"
+                    class="form-control form-control-lg" placeholder="Which category?" aria-label="Search" />
+                <datalist id="available_categories">
+                </datalist>
+                <input type="submit" class="btn btn-dark btn-lg mt-2 submit" value="Let's gooo" />
+    </fieldset>
+        </div>
     </div>
-</div>
+    <hr>
+    <div class="row justify-content-md-center m-5">
+        <div class="col-10">
+            <h3>Popular Searches</h3>
+            {% for brand in available_brands %}
+            <input type="button" id="popular_brand_search" class="btn btn-dark btn-lg mt-2 next"
+                value="{{ brand.brand_name|upper }}" /> {% endfor %}
+        </div>
+    </div>
+
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $('.next').click(function () {
+        brand = $("#brand_search").val() || $("#popular_brand_search").val()
+        var options = {};
+        options.type = "GET";
+        options.url = "ajax/get_categories_available/";
+        options.type = "GET";
+        options.data = {
+            "brand": brand
+        };
+        options.dataType = "json";
+        options.success = function (data) {
+            $("#available_categories").empty();
+            for (var i = 0; i < data.length; i++) {
+                $("#available_categories").append("<option>" + data[i]['category'] + "</option>");
+            }
+        }
+
+        $.ajax(options);
+
+        var current_fs, next_fs, previous_fs; //fieldsets
+
+        current_fs = $(this).parent();
+        next_fs = $(this).parent().next();
+
+        current_fs.hide();
+        next_fs.show();
+    });
+</script>
 
 {% endblock %}
-
-<!-- <div class="fieldWrapper">
-            {{ search_form.as_p }} 
-        </div>

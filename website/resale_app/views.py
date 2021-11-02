@@ -1,18 +1,28 @@
 from django.shortcuts import get_object_or_404, render
 from django.db.models import Q
+from django.http import HttpResponse
+from django.core.serializers.json import DjangoJSONEncoder
+
+import json 
 
 from .models import SoldItemsWomen
 from .forms import SearchForm
 from . import calculations as calc
 
- 
+
+
+def get_categories_available(request):
+    brand = request.GET.get('brand', None)
+    data = SoldItemsWomen.objects.values('category').distinct().filter(Q(brand_name=brand))
+    response = json.dumps(list(data), cls=DjangoJSONEncoder)
+    return HttpResponse(response)
+
+
 def search_page(request):
     available_brands = SoldItemsWomen.objects.values('brand_name').distinct()
-    search_form = SearchForm()
     
     context = {
-        "available_brands": available_brands,
-        "search_form": search_form
+        "available_brands": available_brands
     }
     return render(request, 'resale_app/search_page.html', context)
 
@@ -23,32 +33,25 @@ def search_page(request):
 def search_result(request):
 
     if request.method == 'POST':
+
         # create a form instance and populate it with data from the request:
-        form = SearchForm(request.POST)
+        form = SearchForm(request.POST)  
+
         # check whether it's valid:
         if form.is_valid():
             garment_brand = form.cleaned_data['brand']
-            garment_size = form.cleaned_data['size']
             garment_category = form.cleaned_data['category']
 
             data = SoldItemsWomen.objects.filter(
                 Q(brand_name=garment_brand),
-                Q(size=garment_size), Q(category=garment_category)
+                Q(category=garment_category)
             )
-
-            # data_nwt = SoldItemsWomen.objects.filter(
-            #     Q(brand_name=garment_brand),
-            #     Q(size=garment_size), 
-            #     Q(category=garment_category),
-            #     Q(condition='NWT'),
-            # )
 
             graph_data = [int(x.sale_price) for x in data.iterator()]
             avg_sale_price = calc.calculate_average_sale_price(data)
             range_sale_price = calc.calculate_range_sale_price(data)
             avg_list_price_reduction = calc.calculate_avg_list_price_reduction(data)
             eighty_percent_category = calc.calculate_eighty_percent(data)
-            # avg_sale_price_new = calc.calculate_average_sale_price(data_nwt)
 
             context = {
                 "garment_brand": garment_brand,
@@ -59,7 +62,6 @@ def search_result(request):
                 "range_sale_price": range_sale_price,
                 "avg_list_price_reduction": avg_list_price_reduction,
                 "eighty_percent_category": eighty_percent_category
-                # "avg_sale_price_new": avg_sale_price_new
             }
 
         else:
