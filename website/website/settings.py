@@ -89,19 +89,32 @@ WSGI_APPLICATION = 'website.wsgi.application'
 #    }
 # }
 
+# DATABASES = {
+
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'resale_app',
+#         'USER': 'postgres',
+#         'PASSWORD': 'james_password',
+#         'HOST': 'localhost',    
+#         'PORT': '5432',
+#     }
+
+# }
+
+
 DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'resale_app',
+        'NAME': 'resale-app',
         'USER': 'postgres',
         'PASSWORD': 'james_password',
-        'HOST': 'localhost',    
+        'HOST': 'resale-app.crhke8wioxfr.us-west-2.rds.amazonaws.com',    
         'PORT': '5432',
     }
 
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
