@@ -51,12 +51,10 @@ sudo systemctl restart postgresql.service # restart the service
 
 
 # Run the server 
+
 python3 website/manage.py runserver 0.0.0.0:8000
 
 #  Website should be up and running now 
-
-
-
-
-
+export DJANGO_SETTINGS_MODULE=website.dev_settings
+export DJANGO_SETTINGS_MODULE=website.prod_settings
 

@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +25,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-c5qwy*ui-smhpaw087qbh!7#wxxsvw4uc0p&!k!dv2v34+s_^8'
+SECRET_KEY=os.getenv("DJANGO_SECRET_KEY")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS_DEV')]
 
 # Application definition
 
@@ -72,16 +77,14 @@ WSGI_APPLICATION = 'website.wsgi.application'
 
 
 DATABASES = {
-
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'resale_app',
-        'USER': 'joconnor',
-        'PASSWORD': 'james_password',
-        'HOST': 'localhost',    
+        'NAME': os.getenv("DB_NAME_DEV"),
+        'USER': os.getenv("DB_USER_DEV"),
+        'PASSWORD': os.getenv("DB_PASSWORD_DEV"),
+        'HOST': os.getenv("DB_HOST_DEV"),    
         'PORT': '5432',
     }
-
 }
 
 # Password validation
