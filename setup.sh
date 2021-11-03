@@ -53,6 +53,9 @@ sudo systemctl restart postgresql.service # restart the service
 # Run the server 
 python3 website/manage.py runserver 0.0.0.0:8000
 
+#  Website should be up and running now 
+
+
 
 
 

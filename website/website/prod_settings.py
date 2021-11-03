@@ -16,7 +16,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -24,10 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-c5qwy*ui-smhpaw087qbh!7#wxxsvw4uc0p&!k!dv2v34+s_^8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['54.202.121.48', '127.0.0.1', '0.0.0.0']
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -72,39 +70,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'website.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, '../db/sold_items.db'),
-#    }
-# }
-
-# DATABASES = {
-
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'resale_app',
-#         'USER': 'postgres',
-#         'PASSWORD': 'james_password',
-#         'HOST': 'localhost',    
-#         'PORT': '5432',
-#     }
-
-# }
-
-
 DATABASES = {
-
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'resale-app',
@@ -113,7 +79,6 @@ DATABASES = {
         'HOST': 'resale-app.crhke8wioxfr.us-west-2.rds.amazonaws.com',    
         'PORT': '5432',
     }
-
 }
 
 # Password validation

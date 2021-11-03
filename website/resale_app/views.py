@@ -1,20 +1,26 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import render
+from django.http import Http404
 from django.db.models import Q
 from django.http import HttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
-
-import json 
-
 from .models import SoldItemsWomen
 from .forms import SearchForm
 from . import calculations as calc
 
+import json 
 
 
 def get_categories_available(request):
     brand = request.GET.get('brand', None)
-    data = SoldItemsWomen.objects.values('category').distinct().filter(Q(brand_name=brand))
-    response = json.dumps(list(data), cls=DjangoJSONEncoder)
+
+    try:
+        data = SoldItemsWomen.objects.values('category').distinct().filter(Q(brand_name=brand.upper()))
+        response = json.dumps(list(data), cls=DjangoJSONEncoder)
+
+    except SoldItemsWomen.DoesNotExist:
+        raise Http404("Given query not found....")
+
+
     return HttpResponse(response)
 
 
@@ -26,9 +32,6 @@ def search_page(request):
     }
     return render(request, 'resale_app/search_page.html', context)
 
-# Brand: lululemon 
-# Size: S
-# Type: Pants_&_Jumpsuits
 
 def search_result(request):
 
@@ -43,7 +46,7 @@ def search_result(request):
             garment_category = form.cleaned_data['category']
 
             data = SoldItemsWomen.objects.filter(
-                Q(brand_name=garment_brand),
+                Q(brand_name=garment_brand.upper()),
                 Q(category=garment_category)
             )
 

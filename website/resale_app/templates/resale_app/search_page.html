@@ -17,13 +17,13 @@
 <form id="search" action="./search_result/" , method="post">
     {% csrf_token %}
     <div class="row justify-content-md-center m-10 form-inline">
-        <div class="col-sm-6">
+        <div class="col-sm-6 search_form">
             <fieldset>
                 <input type="search" name="brand" id="brand_search" list="available_brands"
                     class="form-control form-control-lg" placeholder="Search Brands.." aria-label="Search" />
                 <datalist id="available_brands">
                     {% for brand in available_brands %}
-                    <option>{{ brand.brand_name }}</option>
+                    <option>{{ brand.brand_name|title }}</option>
                     {% endfor %}
                 </datalist>
                 <input type="button" class="btn btn-dark btn-lg mt-2 next" value="Next" />
@@ -33,52 +33,62 @@
                     class="form-control form-control-lg" placeholder="Which category?" aria-label="Search" />
                 <datalist id="available_categories">
                 </datalist>
-                <input type="submit" class="btn btn-dark btn-lg mt-2 submit" value="Let's gooo" />
+                <input type="submit" class="btn btn-dark btn-lg mt-2 submit" value="Let's go!" />
             </fieldset>
         </div>
     </div>
-    <hr>
-    <div class="row justify-content-md-center m-5">
-        <div class="col-10">
-            <h3>Popular Searches</h3>
-            {% for brand in available_brands %}
-            <input type="button" id="popular_brand_search" class="btn btn-dark btn-lg mt-2 next"
-                value="{{ brand.brand_name|upper }}" /> {% endfor %}
-        </div>
-    </div>
-
 </form>
+
+<button onclick="window.location.reload();" id="new_search" class="btn btn-dark btn-lg mt-2">New Search</button>
+<hr>
+
+<div class="row justify-content-md-center m-5">
+    <div class="col-10">
+        <h3>Popular Searches</h3>
+        {% for brand in available_brands %}
+        <input type="button" id="popular_brand_search" class="btn btn-dark btn-lg mt-2 next"
+            value="{{ brand.brand_name|upper }}" /> {% endfor %}
+    </div>
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
-<script type="text/javascript">
-    $('.next').click(function () {
-        brand = $("#brand_search").val() || $("#popular_brand_search").val()
-        var options = {};
-        options.type = "GET";
-        options.url = "ajax/get_categories_available/";
-        options.type = "GET";
-        options.data = {
-            "brand": brand
-        };
-        options.dataType = "json";
-        options.success = function (data) {
-            $("#available_categories").empty();
-            for (var i = 0; i < data.length; i++) {
-                $("#available_categories").append("<option>" + data[i]['category'] + "</option>");
+<script>
+$('.next').click(function () {
+    brand = $("#brand_search").val() || $("#popular_brand_search").val()
+    var options = {};
+    options.type = "GET";
+    options.url = "ajax/get_categories_available/";
+    options.type = "GET";
+    options.data = {
+        "brand": brand
+    };
+    options.dataType = "json";
+    options.success = function (data) {
+        if (data.length == 0) {
+                $(".search_form").empty();
+                $(".search_form").append("<h2>Sorry, we don't have any data on " + brand + " right now :( </h2>");
+                $("#new_search").show();
+                return
             }
+        $("#available_categories").empty();
+        for (var i = 0; i < data.length; i++) {
+            $("#available_categories").append("<option>" + data[i]['category'] + "</option>");
         }
+    }
 
-        $.ajax(options);
+    $.ajax(options);
 
-        var current_fs, next_fs, previous_fs; //fieldsets
+    var current_fs, next_fs, previous_fs; //fieldsets
 
-        current_fs = $(this).parent();
-        next_fs = $(this).parent().next();
+    current_fs = $(this).parent();
+    next_fs = $(this).parent().next();
 
-        current_fs.hide();
-        next_fs.show();
-    });
+    current_fs.hide();
+    next_fs.show();
+});
+
 </script>
+
 
 {% endblock %}

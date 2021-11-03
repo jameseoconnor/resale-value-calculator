@@ -1,0 +1,28 @@
+{
+    "women": {
+        "brands": {
+            // "Patagonia": [
+            //     "Bags",
+            //     "Dresses",
+            //     "Jeans",
+            //     "Shoes",
+            //     "Shorts",
+            //     "Skirts",
+            //     "Tops"
+            // ],
+            // "CHANEL": [
+            //     "Bags",
+            //     "Dresses",
+            //     "Jeans",
+            //     "Shoes",
+            //     "Tops"
+            // ],
+            "PAIGE": [
+                "Jeans",
+                "Shorts",
+                "Tops"
+            ]
+
+        }
+    }
+}

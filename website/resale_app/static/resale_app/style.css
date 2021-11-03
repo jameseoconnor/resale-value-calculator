@@ -195,3 +195,7 @@ input.next {
 input.submit {
     float: right;
 }
+
+#new_search {
+    display: None;
+}
