@@ -2,4 +2,4 @@ venv/
 *.db
 .env
 
-__pycache__/
+website/resale_app/__pycache__/
