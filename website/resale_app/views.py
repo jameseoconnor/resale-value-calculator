@@ -57,8 +57,8 @@ def search_result(request):
             eighty_percent_category = calc.calculate_eighty_percent(data)
 
             context = {
-                "garment_brand": garment_brand,
-                "garment_category": garment_category,
+                "garment_brand": garment_brand.replace("_", " "),
+                "garment_category": garment_category.replace("_", " "),
                 "total_results": len(data),
                 "graph_data": sorted(list(graph_data)),
                 "avg_sale_price": avg_sale_price,

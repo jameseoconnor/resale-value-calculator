@@ -1,28 +1,97 @@
 {
     "women": {
         "brands": {
-            // "Patagonia": [
-            //     "Bags",
-            //     "Dresses",
-            //     "Jeans",
-            //     "Shoes",
-            //     "Shorts",
-            //     "Skirts",
-            //     "Tops"
-            // ],
-            // "CHANEL": [
-            //     "Bags",
-            //     "Dresses",
-            //     "Jeans",
-            //     "Shoes",
-            //     "Tops"
-            // ],
+            "Patagonia": [
+                "Bags",
+                "Dresses",
+                "Jeans",
+                "Shoes",
+                "Shorts",
+                "Skirts",
+                "Tops"
+            ],
+            "CHANEL": [
+                "Bags",
+                "Dresses",
+                "Jackets_&_Coats",
+                "Jeans",
+                "Shoes",
+                "Shorts",
+                "Skirts",
+                "Sweaters",
+                "Tops"
+            ],
             "PAIGE": [
                 "Jeans",
                 "Shorts",
                 "Tops"
+            ],
+            "Michael_Kors": [
+                "Bags",
+                "Dresses",
+                "Jackets_&_Coats",
+                "Jeans",
+                "Shoes",
+                "Shorts",
+                "Skirts",
+                "Sweaters",
+                "Tops"
+            ],
+            "Coach": [
+                "Bags",
+                "Dresses",
+                "Jackets_&_Coats",
+                "Jeans",
+                "Shoes",
+                "Shorts",
+                "Skirts",
+                "Sweaters",
+                "Tops"
+            ],
+            "Nike": [
+                "Bags",
+                "Dresses",
+                "Jackets_&_Coats",
+                "Jeans",
+                "Shoes",
+                "Shorts",
+                "Skirts",
+                "Sweaters",
+                "Tops"
+            ],
+            "kate_spade": [
+                "Bags",
+                "Dresses",
+                "Jackets_&_Coats",
+                "Jeans",
+                "Shoes",
+                "Shorts",
+                "Skirts",
+                "Sweaters",
+                "Tops"
+            ],
+            "J._Crew": [
+                "Bags",
+                "Dresses",
+                "Jackets_&_Coats",
+                "Jeans",
+                "Shoes",
+                "Shorts",
+                "Skirts",
+                "Sweaters",
+                "Tops"
+            ],
+            "allbirds": [
+                "Bags",
+                "Dresses",
+                "Jackets_&_Coats",
+                "Jeans",
+                "Shoes",
+                "Shorts",
+                "Skirts",
+                "Sweaters",
+                "Tops"
             ]
-
         }
     }
 }
