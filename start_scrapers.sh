@@ -21,24 +21,15 @@ set -o allexport
 source .env
 set +o allexport
 
+run_date_friendly=$(date)
+run_date=$(date +%s)
+
 
 function start_scraper() {
   cd scrapers/
-  python3 pm_scraper.py 
+  # python3 pm_scraper.py 
   rm -rf .scraper_pid
+  echo "scraper completed at $run_date_friendly" > log/"$run_date".txt
 }
 
 start_scraper
-
-# PS3="Choose an Environment: " 
-# options=("Development" "Production")
-# select menu in "${options[@]}";
-
-# do
-#   echo -e "\nSetting up $menu ($REPLY) environment"
-#   if [[ $menu == "Production" ]]; then
-#     setup_production_environment;
-#   else
-#     setup_development_environment;
-#   fi
-# done
