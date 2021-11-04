@@ -19,7 +19,7 @@
     <div class="row justify-content-md-center m-10 form-inline">
         <div class="col-sm-6 search_form">
             <fieldset>
-                <select class="form-control form-control-lg" name="brand" autocomplete="True">
+                <select class="form-control form-control-lg" id="brand_search" name="brand" autocomplete="True">
                     <option value="" disabled selected>Select Brand...</option>
                     {% for brand in available_brands %}
                     <option>{{ brand.brand_name|title }}</option>
@@ -71,7 +71,7 @@ $('.next').click(function () {
             }
 
             for (var i = 0; i < data.length; i++) {
-            $("#available_categories").append("<option>" + data[i]['category'] + "</option>");
+            $("#available_categories").append("<option>" + data[i] + "</option>");
         }
     }
 
