@@ -6,16 +6,24 @@ source venv/bin/activate
 # get the latest code 
 git pull
 
+# Get the env vars 
+set -o allexport
+source .env
+set +o allexport
+
+
 function setup_development_environment() {
     export ENV="DEV"
     export DJANGO_SETTINGS_MODULE=website.dev_settings
-    python3 website/manage.py runserver
+    cd website/
+    gunicorn --workers=$GUN_WORKERS_DEV website.wsgi -b $APP_HOST_DEV:$APP_PORT_DEV
 }
 
 function setup_production_environment() {
     export ENV="PROD"
     export DJANGO_SETTINGS_MODULE=website.prod_settings
-    python3 website/manage.py runserver 0.0.0.0:8000
+    cd website/
+    gunicorn --workers=$GUN_WORKERS_PROD website.wsgi -b $APP_HOST_PROD:$APP_PORT_PROD
 }
 
 PS3="Choose an Environment: " 
