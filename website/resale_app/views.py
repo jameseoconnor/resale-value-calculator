@@ -43,8 +43,8 @@ def search_result(request):
 
         # check whether it's valid:
         if form.is_valid():
-            garment_brand = form.cleaned_data['brand'].replace(" ", "_")
-            garment_category = form.cleaned_data['category'].replace(" ", "_")
+            garment_brand = form.cleaned_data['brand'].upper()
+            garment_category = form.cleaned_data['category']
 
             data = SoldItemsWomen.objects.filter(
                 Q(brand_name=garment_brand.upper()),
@@ -58,7 +58,7 @@ def search_result(request):
             eighty_percent_category = calc.calculate_eighty_percent(data)
 
             context = {
-                "garment_brand": garment_brand.replace("_", " "),
+                "garment_brand": garment_brand,
                 "garment_category": garment_category.replace("_", " "),
                 "total_results": len(data),
                 "graph_data": sorted(list(graph_data)),
