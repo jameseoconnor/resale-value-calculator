@@ -15,7 +15,7 @@ def get_categories_available(request):
 
     try:
         data = SoldItemsWomen.objects.values('category').distinct().filter(Q(brand_name=brand.upper()))
-        response = json.dumps(list(data), cls=DjangoJSONEncoder)
+        response = json.dumps([x.replace("_", " ") for x in data], cls=DjangoJSONEncoder)
 
     except SoldItemsWomen.DoesNotExist:
         raise Http404("Given query not found....")
