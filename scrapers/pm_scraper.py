@@ -142,13 +142,11 @@ def scrape_data(brand, category):
                 continue
 
 
-def main():
+if __name__ == "__main__":
+
     with open("pm_data.json", "r") as data: 
         data = json.load(data)
     
     for brand in data[gender]['brands']:
         for category in data[gender]['brands'][brand]:
             scrape_data(brand, category)
-
-
-main()
