@@ -6,4 +6,4 @@ venv/
 
 setup_steps.md
 
-scrapers/log/*
+scrapers/log/*.txt
