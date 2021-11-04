@@ -79,10 +79,10 @@ def scrape_data(brand, category):
         for html_details in soup.find_all("div", {"class": "card card--small"}):
             try:
                 #   Get Item Name 
-                name = get_value_from_html(html_details, "img", "ovf--h", tag_attrib="alt")
-
+                name = get_value_from_html(html_details, "img", "ovf--h", tag_attrib="alt").replace("'", "")
+                
                 #   Get Item Link
-                link = base_url + get_value_from_html(html_details, "a", "tile__title tc--b", tag_attrib="href").lower()
+                link = base_url + get_value_from_html(html_details, "a", "tile__title tc--b", tag_attrib="href").lower().replace("'", "")
 
                 #   Get the property listing ID     
                 item_id = get_value_from_html(html_details, "a", "tile__title tc--b", tag_attrib="data-et-prop-listing_id")

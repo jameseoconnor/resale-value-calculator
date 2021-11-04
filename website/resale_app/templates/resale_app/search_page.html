@@ -19,20 +19,18 @@
     <div class="row justify-content-md-center m-10 form-inline">
         <div class="col-sm-6 search_form">
             <fieldset>
-                <input type="search" name="brand" id="brand_search" list="available_brands"
-                    class="form-control form-control-lg" placeholder="Search Brands.." aria-label="Search" />
-                <datalist id="available_brands">
+                <select class="form-control form-control-lg" name="brand" autocomplete="True">
+                    <option value="" disabled selected>Select Brand...</option>
                     {% for brand in available_brands %}
                     <option>{{ brand.brand_name|title }}</option>
                     {% endfor %}
-                </datalist>
+                </select>
                 <input type="button" class="btn btn-dark btn-lg mt-2 next" value="Next" />
             </fieldset>
             <fieldset>
-                <input type="search" name="category" id="category_search" list="available_categories"
-                    class="form-control form-control-lg" placeholder="Which category?" aria-label="Search" />
-                <datalist id="available_categories">
-                </datalist>
+                <select class="form-control form-control-lg" id="available_categories" name="category">
+                    <option value="" disabled selected>Select Category...</option>
+                </select>
                 <input type="submit" class="btn btn-dark btn-lg mt-2 submit" value="Let's go!" />
             </fieldset>
         </div>
@@ -71,8 +69,8 @@ $('.next').click(function () {
                 $("#new_search").show();
                 return
             }
-        $("#available_categories").empty();
-        for (var i = 0; i < data.length; i++) {
+
+            for (var i = 0; i < data.length; i++) {
             $("#available_categories").append("<option>" + data[i]['category'] + "</option>");
         }
     }
