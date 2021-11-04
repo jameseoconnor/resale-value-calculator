@@ -6,18 +6,27 @@ import psycopg2
 import json
 from bs4 import BeautifulSoup
 from sqlalchemy import create_engine, text
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
+env = os.getenv('ENV')
 
-db_address = 'localhost'
+db_address = os.getenv(f'DB_HOST_{env}')
 db_port = 5432
-db_user = 'joconnor'
-db_password = 'james_password'
-db_name = 'resale_app'
+db_user = os.getenv(f'DB_USER_{env}')
+db_password = os.getenv(f'DB_PASSWORD_{env}')
+db_name = os.getenv(f'DB_NAME_{env}')
 postgres_str = (f'postgresql://{db_user}:{db_password}@{db_address}:{db_port}/{db_name}')
+
+
 # Create the connection
-
-cnx = create_engine(postgres_str)
-
+try:
+    cnx = create_engine(postgres_str)
+    print("Env vars are working")
+except Exception as e: 
+    print(e)
+    
 
 def request_get_html(url):
     html = requests.get(url)
@@ -57,15 +66,6 @@ base_url = "https://poshmark.com"
 gender = "women"
 query_filter = "?availability=sold_out"
 page_limit = 1
-
-
-def main():
-    with open("pm_data.json", "r") as data: 
-        data = json.load(data)
-    
-    for brand in data[gender]['brands']:
-        for category in data[gender]['brands'][brand]:
-            scrape_data(brand, category)
 
 
 def scrape_data(brand, category):
@@ -140,6 +140,15 @@ def scrape_data(brand, category):
             except Exception as e: 
                 print(e)
                 continue
+
+
+def main():
+    with open("pm_data.json", "r") as data: 
+        data = json.load(data)
+    
+    for brand in data[gender]['brands']:
+        for category in data[gender]['brands'][brand]:
+            scrape_data(brand, category)
 
 
 main()
