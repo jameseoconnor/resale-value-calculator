@@ -21,7 +21,6 @@ def get_categories_available(request):
     except SoldItemsWomen.DoesNotExist:
         raise Http404("Given query not found....")
 
-
     return HttpResponse(response)
 
 
@@ -31,6 +30,7 @@ def search_page(request):
     context = {
         "available_brands": available_brands
     }
+
     return render(request, 'resale_app/search_page.html', context)
 
 
@@ -44,7 +44,7 @@ def search_result(request):
         # check whether it's valid:
         if form.is_valid():
             garment_brand = form.cleaned_data['brand'].upper()
-            garment_category = form.cleaned_data['category']
+            garment_category = form.cleaned_data['category'].replace(" ", "_")
 
             data = SoldItemsWomen.objects.filter(
                 Q(brand_name=garment_brand.upper()),
