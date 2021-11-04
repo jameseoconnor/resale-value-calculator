@@ -17,15 +17,13 @@ db_port = 5432
 db_user = os.getenv(f'DB_USER_{env}')
 db_password = os.getenv(f'DB_PASSWORD_{env}')
 db_name = os.getenv(f'DB_NAME_{env}')
+page_limit = int(os.getenv('SCRAPER_PAGE_LIMIT'))
 postgres_str = (f'postgresql://{db_user}:{db_password}@{db_address}:{db_port}/{db_name}')
 
 
 # Create the connection
-try:
-    cnx = create_engine(postgres_str)
-    print("Env vars are working")
-except Exception as e: 
-    print(e)
+cnx = create_engine(postgres_str)
+
     
 
 def request_get_html(url):
@@ -65,7 +63,6 @@ def get_value_from_html(html, tag_type, class_name, tag_attrib=None, str_replace
 base_url = "https://poshmark.com"
 gender = "women"
 query_filter = "?availability=sold_out"
-page_limit = 1
 
 
 def scrape_data(brand, category):
