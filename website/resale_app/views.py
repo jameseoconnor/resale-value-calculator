@@ -43,8 +43,8 @@ def search_result(request):
 
         # check whether it's valid:
         if form.is_valid():
-            garment_brand = form.cleaned_data['brand']
-            garment_category = form.cleaned_data['category']
+            garment_brand = form.cleaned_data['brand'].replace(" ", "_")
+            garment_category = form.cleaned_data['category'].replace(" ", "_")
 
             data = SoldItemsWomen.objects.filter(
                 Q(brand_name=garment_brand.upper()),
