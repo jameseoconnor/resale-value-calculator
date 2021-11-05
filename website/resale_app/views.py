@@ -1,3 +1,5 @@
+import json 
+
 from django.shortcuts import render
 from django.http import Http404
 from django.db.models import Q
@@ -6,8 +8,6 @@ from django.core.serializers.json import DjangoJSONEncoder
 from .models import SoldItemsWomen
 from .forms import SearchForm
 from . import calculations as calc
-
-import json 
 
 
 def get_categories_available(request):
@@ -74,5 +74,3 @@ def search_result(request):
             }
 
     return render(request, 'resale_app/search_result.html', context)
-
-

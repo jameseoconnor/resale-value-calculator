@@ -16,7 +16,8 @@ function setup_development_environment() {
     export ENV="DEV"
     export DJANGO_SETTINGS_MODULE=website.dev_settings
     cd website/
-    gunicorn --workers=$GUN_WORKERS_DEV website.wsgi -b $APP_HOST_DEV:$APP_PORT_DEV
+    # gunicorn --workers=$GUN_WORKERS_DEV website.wsgi -b $APP_HOST_DEV:$APP_PORT_DEV
+    python manage.py runserver
 }
 
 function setup_production_environment() {
