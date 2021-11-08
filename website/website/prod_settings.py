@@ -121,7 +121,7 @@ USE_TZ = True
 
 STATIC_URL = '/website/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'website/static')
+STATIC_ROOT = "/var/www/resale.com/static/"
 
 
 # Default primary key field type
