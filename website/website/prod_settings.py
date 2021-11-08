@@ -119,7 +119,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/website/static/'
+STATIC_URL = 'http://54.191.123.242:8000/'
 
 STATIC_ROOT = "/var/www/resale.com/static/"
 
