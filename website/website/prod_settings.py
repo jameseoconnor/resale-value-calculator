@@ -119,7 +119,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+<<<<<<< HEAD
 STATIC_URL = '/static/'
+=======
+STATIC_URL = 'http://54.191.123.242:8000/'
+>>>>>>> f9b61d34e723bdbff2b777e6b759513758240533
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 MEDIA_ROOT = '/home/ec2-user/media'
