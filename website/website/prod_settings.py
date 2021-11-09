@@ -120,7 +120,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 STATIC_URL = '/static/'
+=======
+STATIC_URL = 'http://54.191.123.242:8000/'
+>>>>>>> f9b61d34e723bdbff2b777e6b759513758240533
 =======
 STATIC_URL = 'http://54.191.123.242:8000/'
 >>>>>>> f9b61d34e723bdbff2b777e6b759513758240533
