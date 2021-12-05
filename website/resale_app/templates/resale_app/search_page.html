@@ -35,7 +35,6 @@
             </fieldset>
         </div>
     </div>
-</form>
 
 <button onclick="window.location.reload();" id="new_search" class="btn btn-dark btn-lg mt-2">New Search</button>
 <hr>
@@ -43,17 +42,30 @@
 <div class="row justify-content-md-center m-5">
     <div class="col-10">
         <h3>Popular Searches</h3>
-        {% for brand in available_brands %}
-        <input type="button" id="popular_brand_search" class="btn btn-dark btn-lg mt-2 next"
-            value="{{ brand.brand_name|upper }}" /> {% endfor %}
+        <div class="popular_searches">
+            {% for brand in available_brands %}
+            <button type="button" id="popular_brand_search_{{ brand.brand_name|upper }}" 
+            class="btn btn-dark btn-lg mt-2 pop_search"> {{ brand.brand_name|title }} </button>
+            {% endfor %}
+        </div>
     </div>
 </div>
+</form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
 <script>
+
+$(".pop_search").click(function (){
+    val = $(this).text()
+    alert(val)
+    var $myDD = $("#brand_search");
+    $myDD.append("<option selected>"+ val +"</option>");
+
+});
+
 $('.next').click(function () {
-    brand = $("#brand_search").val() || $("#popular_brand_search").val()
+    brand = $("#brand_search").val()
     var options = {};
     options.type = "GET";
     options.url = "ajax/get_categories_available/";
@@ -70,15 +82,17 @@ $('.next').click(function () {
                 return
             }
 
+            $(".popular_searches").empty();
             for (var i = 0; i < data.length; i++) {
             $("#available_categories").append("<option>" + data[i] + "</option>");
+            $(".popular_searches").append('<button type="button" class="btn btn-dark btn-lg mt-2">' + data[i] + '</button>')
         }
     }
 
     $.ajax(options);
 
     var current_fs, next_fs, previous_fs; //fieldsets
-
+ 
     current_fs = $(this).parent();
     next_fs = $(this).parent().next();
 
