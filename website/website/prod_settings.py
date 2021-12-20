@@ -120,9 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 
-STATIC_URL = '/static/'
-STATIC_URL = 'http://54.191.123.242:8000/'
-STATIC_URL = 'http://54.191.123.242:8000/'
+STATIC_URL = 'ec2-44-232-23-111.us-west-2.compute.amazonaws.com:8000/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 MEDIA_ROOT = '/home/ec2-user/media'
 
