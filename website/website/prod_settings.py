@@ -120,12 +120,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 
-STATIC_URL = '/website/static/'
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'website/static')
-
-MEDIA_ROOT = '/home/ec2-user/media'
-
+STATIC_URL = "/static/"
+# Note: Replace 'supersecure.codes' with your domain
+STATIC_ROOT = "/var/www/thredcheck.com/static"
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
