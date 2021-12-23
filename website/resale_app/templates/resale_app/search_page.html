@@ -7,8 +7,8 @@
 <div class="row justify-content-md-center m-10 form-inline">
     <!-- The left container  -->
     <div class="col-sm-6 left-right-container">
-        <h1 class="display-3 color-1" style="margin-bottom: 20px">Find the best resale price for your pre-loved clothes!</h1>
-        <h4 class="color-2" style="line-height: 1.5;">We search the web for data on second-hand threads that are selling online so you can spend more time lookin' fresh</h4>
+        <h1 class="display-3 color-1 text-shadow" style="margin-bottom: 20px">Find the best resale price for your pre-loved clothes!</h1>
+        <h4 class="color-2 text-shadow" style="line-height: 1.5;">We search the web for data on second-hand threads that are selling online so you can spend more time thriftin'</h4>
     </div>
 
     <!-- The right container  -->
@@ -16,23 +16,25 @@
         <form id="search" action="./search_result/" method="post">
             {% csrf_token %}
             <fieldset>
-                <h4 class="color-1" style="text-align:center; margin-bottom: 30px; text-decoration: underline; text-decoration-color: #15Db95;">See how much your items could be worth</h4>
-                <select class="form-control form-control-lg" id="brand_search" name="brand" autocomplete="True">
+                <h3 class="color-1" style="text-align:center; margin-bottom: 30px; text-decoration: underline; text-decoration-color: hsl(159, 83%, 47%);">
+                    See how much your items could be worth</h3>
+                <select class="form-control form-control-lg search-field" id="brand_search" name="brand"
+                    autocomplete="True">
                     <option value="" disabled selected>Select Brand...</option>
                     {% for brand in available_brands %}
                     <option>{{ brand.brand_name|title }}</option>
                     {% endfor %}
                 </select>
             </fieldset>
+
             <fieldset>
-                <select class="form-control form-control-lg" id="available_categories" name="category">
+                <select class="form-control form-control-lg search-field" id="available_categories" name="category">
                     <option value="" disabled selected>Select Category...</option>
                 </select>
             </fieldset>
 
             <fieldset>
-                <input class="form-control form-control-lg" type="text" placeholder="Keywords (optional)" id="keywords"
-                    name="keywords">
+                <input class="form-control form-control-lg search-field" type="text" placeholder="Keywords (optional)" id="keywords" name="keyword">
             </fieldset>
             <div style="text-align:center">
                 <input type="submit" class="btn btn-dark btn-lg btn-block search-button" value="Search" />
@@ -41,7 +43,6 @@
     </div>
 
 </div>
-
 
 <button onclick="window.location.reload();" id="new_search" class="btn btn-dark btn-lg mt-2">New Search</button>
 

@@ -7,46 +7,84 @@
   </div>
 </div>
 
-{% if search_result %}
-<p>{{ search_result }}</p>
-{% endif %}
-
-<div class="center">
+<h3 class="color-1" style="margin-bottom: 30px; text-decoration: underline; text-decoration-color: hsl(159, 83%, 47%);">
+  Summary: </h3>
+<div>
   <table class="search-results">
     <col span="1" class="wide">
       <tr>
-        <td class=font-bold>Search results:</td>
+        <td class="font-bold">Search results:</td>
         <td><strong class="color-2">{{ total_results }}</strong></td>
       </tr>
       <tr>
-        <td class=font-bold>Average re-sell price:</td>
+        <td class="font-bold">Average re-sell price:</td>
         <td><strong class="color-2">{{ avg_sale_price}}</strong></td>
       </tr>
       <tr>
-        <td class=font-bold>Resell price range:</td>
-        <td><strong class="color-2 ">{{ range_sale_price }}</strong></td>
+        <td class="font-bold">Resell price range:</td>
+        <td><strong class="color-2">{{ range_sale_price }}</strong></td>
       </tr>
       <tr>
-        <td class=font-bold>Sellers usually reduce the price by:</td>
+        <td class="font-bold">Sellers usually reduce the price by:</td>
         <td><strong class="color-2">{{ avg_list_price_reduction}}</strong></td>
       </tr>
       <tr>
-        <td class=font-bold>Eighty percent re-sell for at least: </td>
+        <td class="font-bold">Eighty percent re-sell for at least: </td>
         <td><strong class="color-2">{{ eighty_percent_category}}</strong></td>
       </tr>
   </table>
 </div>
 
-
 <!-- <canvas id="myChart" width="100" height="20"></canvas> -->
 
+{% if keyword %}
 <hr>
+<h3 class="color-1" style="margin-bottom: 30px; text-decoration: underline; text-decoration-color: hsl(159, 83%, 47%);">
+  Keyword "{{ keyword }}" search results: </h3>
+{% if keyword_data %}
 
+<div>
+  <table class="search-results">
+    <col span="1" class="wide">
+      <tr>
+        <td class="font-bold">Search results:</td>
+        <td><strong class="color-2">{{ keyword_total_results }}</strong></td>
+      </tr>
+      <tr>
+        <td class="font-bold">Average re-sell price:</td>
+        <td><strong class="color-2">{{ keyword_avg_sale_price}}</strong></td>
+      </tr>
+      <tr>
+        <td class="font-bold">Resell price range:</td>
+        <td><strong class="color-2">{{ keyword_range_sale_price }}</strong></td>
+      </tr>
+  </table>
+</div>
+
+
+<div>
+  <br>
+  <h3 class="color-1" style="margin-bottom: 30px; text-decoration: underline; text-decoration-color: hsl(159, 83%, 47%);">
+    Recently sold "{{ keyword }}" items: </h3>
+  <ul>
+  {% for item in keyword_data %}
+  <li class="search-results font-light">{{ item.name|title }} recently sold for <strong>${{ item.sale_price }}</strong></p>  </li>
+  {% endfor %}
+  </ul>
+</div>
+
+{% else %}
+<p class="search-results font-light">No search results found for "{{ keyword }}"</p>
+{% endif %}
+{% endif %}
 <a href="{% url 'search_page' %}"><button class="btn btn-dark btn-lg mt-2 mb-5 next">New Search</button></a>
+
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"
   integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ=="
-  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  crossorigin="anonymous" referrerpolicy="no-referrer">
+</script>
 
 <script>
   const ctx = document.getElementById('myChart').getContext('2d');
