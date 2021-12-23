@@ -1,106 +1,51 @@
 {% extends "resale_app/base.html" %} {% block content %}
 
-<style>
-    /* Hide all except first fieldset*/
+{% load static %}
 
-    #search fieldset:not(:first-of-type) {
-        display: none;
-    }
-</style>
 
-<div class="row justify-content-md-center m-5">
-    <div class="d-flex justify-content-center">
-        <h1>Find the best resale price for your pre-loved clothes!</h1>
+<!-- Main Container -->
+<div class="row justify-content-md-center m-10 form-inline">
+    <!-- The left container  -->
+    <div class="col-sm-6 left-right-container">
+        <h1 class="display-3 color-1" style="margin-bottom: 20px">Find the best resale price for your pre-loved clothes!</h1>
+        <h4 class="color-2" style="line-height: 1.5;">We search the web for data on second-hand threads that are selling online so you can spend more time lookin' fresh</h4>
     </div>
-</div>
 
-<form id="search" action="./search_result/" , method="post">
-    {% csrf_token %}
-    <div class="row justify-content-md-center m-10 form-inline">
-        <div class="col-sm-6 search_form">
+    <!-- The right container  -->
+    <div class="col-sm-6 left-right-container search_form">
+        <form id="search" action="./search_result/" method="post">
+            {% csrf_token %}
             <fieldset>
+                <h4 class="color-1" style="text-align:center; margin-bottom: 30px; text-decoration: underline; text-decoration-color: #15Db95;">See how much your items could be worth</h4>
                 <select class="form-control form-control-lg" id="brand_search" name="brand" autocomplete="True">
                     <option value="" disabled selected>Select Brand...</option>
                     {% for brand in available_brands %}
                     <option>{{ brand.brand_name|title }}</option>
                     {% endfor %}
                 </select>
-                <input type="button" class="btn btn-dark btn-lg mt-2 next" value="Next" />
             </fieldset>
             <fieldset>
                 <select class="form-control form-control-lg" id="available_categories" name="category">
                     <option value="" disabled selected>Select Category...</option>
                 </select>
-                <input type="submit" class="btn btn-dark btn-lg mt-2 submit" value="Let's go!" />
             </fieldset>
-        </div>
+
+            <fieldset>
+                <input class="form-control form-control-lg" type="text" placeholder="Keywords (optional)" id="keywords"
+                    name="keywords">
+            </fieldset>
+            <div style="text-align:center">
+                <input type="submit" class="btn btn-dark btn-lg btn-block search-button" value="Search" />
+            </div>
+        </form>
     </div>
+
+</div>
+
 
 <button onclick="window.location.reload();" id="new_search" class="btn btn-dark btn-lg mt-2">New Search</button>
-<hr>
 
-<div class="row justify-content-md-center m-5">
-    <div class="col-10">
-        <h3>Popular Searches</h3>
-        <div class="popular_searches">
-            {% for brand in available_brands %}
-            <button type="button" id="popular_brand_search_{{ brand.brand_name|upper }}" 
-            class="btn btn-dark btn-lg mt-2 pop_search"> {{ brand.brand_name|title }} </button>
-            {% endfor %}
-        </div>
-    </div>
-</div>
-</form>
-
+<script src="{% static 'resale_app/js/search.js' %}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-
-<script>
-
-$(".pop_search").click(function (){
-    val = $(this).text()
-    alert(val)
-    var $myDD = $("#brand_search");
-    $myDD.append("<option selected>"+ val +"</option>");
-
-});
-
-$('.next').click(function () {
-    brand = $("#brand_search").val()
-    var options = {};
-    options.type = "GET";
-    options.url = "ajax/get_categories_available/";
-    options.type = "GET";
-    options.data = {
-        "brand": brand
-    };
-    options.dataType = "json";
-    options.success = function (data) {
-        if (data.length == 0) {
-                $(".search_form").empty();
-                $(".search_form").append("<h2>Sorry, we don't have any data on " + brand + " right now :( </h2>");
-                $("#new_search").show();
-                return
-            }
-
-            $(".popular_searches").empty();
-            for (var i = 0; i < data.length; i++) {
-            $("#available_categories").append("<option>" + data[i] + "</option>");
-            $(".popular_searches").append('<button type="button" class="btn btn-dark btn-lg mt-2">' + data[i] + '</button>')
-        }
-    }
-
-    $.ajax(options);
-
-    var current_fs, next_fs, previous_fs; //fieldsets
- 
-    current_fs = $(this).parent();
-    next_fs = $(this).parent().next();
-
-    current_fs.hide();
-    next_fs.show();
-});
-
-</script>
-
 
 {% endblock %}

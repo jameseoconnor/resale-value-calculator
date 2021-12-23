@@ -3,7 +3,7 @@
 
 <div class="row justify-content-md-center m-5">
   <div class="d-flex justify-content-center">
-    <h1>Here is how much your item could be worth!</h1>
+    <h1 class="display-4 color-1">Here is how much {{garment_brand|title }} {{ garment_category|lower }} could be worth!</h1>
   </div>
 </div>
 
@@ -11,29 +11,34 @@
 <p>{{ search_result }}</p>
 {% endif %}
 
-<ul>
-  <p>
-    Number of re-sold {{garment_brand|title }} {{ garment_category }} items
-    analysed: {{ total_results }}
-  </p>
-  <p>Average re-sell price: {{ avg_sale_price}}</p>
-  {% if avg_sale_price_new %}
-  <p>
-    If the item is new, the average resell price goes to {{ avg_sale_price_new
-    }}
-  </p>
-  {% endif %}
-  <p>Resell price range: {{ range_sale_price }}</p>
-  <p>
-    Sellers usually reduce the price on average by {{ avg_list_price_reduction}}
-  </p>
-  <p>
-    80% of {{garment_brand|title }} {{ garment_category }} resell for at least
-    {{ eighty_percent_category}}
-  </p>
-</ul>
+<div class="center">
+  <table class="search-results">
+    <col span="1" class="wide">
+      <tr>
+        <td class=font-bold>Search results:</td>
+        <td><strong class="color-2">{{ total_results }}</strong></td>
+      </tr>
+      <tr>
+        <td class=font-bold>Average re-sell price:</td>
+        <td><strong class="color-2">{{ avg_sale_price}}</strong></td>
+      </tr>
+      <tr>
+        <td class=font-bold>Resell price range:</td>
+        <td><strong class="color-2 ">{{ range_sale_price }}</strong></td>
+      </tr>
+      <tr>
+        <td class=font-bold>Sellers usually reduce the price by:</td>
+        <td><strong class="color-2">{{ avg_list_price_reduction}}</strong></td>
+      </tr>
+      <tr>
+        <td class=font-bold>Eighty percent re-sell for at least: </td>
+        <td><strong class="color-2">{{ eighty_percent_category}}</strong></td>
+      </tr>
+  </table>
+</div>
 
-<canvas id="myChart" width="100" height="20"></canvas>
+
+<!-- <canvas id="myChart" width="100" height="20"></canvas> -->
 
 <hr>
 
