@@ -45,17 +45,12 @@ def search_result(request):
         if form.is_valid():
             garment_brand = form.cleaned_data['brand'].upper()
             garment_category = form.cleaned_data['category'].replace(" ", "_")
-            garment_keyword = form.cleaned_data['keyword']
+            # garment_keyword = form.cleaned_data['keyword']
+            garment_keyword = 'test'
 
             data = SoldItemsWomen.objects.filter(
-                Q(brand_name=garment_brand.upper()),
+                Q(brand_name=garment_brand.upper()),    
                 Q(category=garment_category),
-            )
-
-            keyword_data = SoldItemsWomen.objects.filter(
-                Q(brand_name=garment_brand.upper()),
-                Q(category=garment_category),
-                Q(name__contains=garment_keyword.upper()),
             )
 
             graph_data = [int(x.sale_price) for x in data.iterator()]
@@ -63,9 +58,6 @@ def search_result(request):
             range_sale_price = calc.calculate_range_sale_price(data)
             avg_list_price_reduction = calc.calculate_avg_list_price_reduction(data)
             eighty_percent_category = calc.calculate_eighty_percent(data)
-
-            keyword_avg_sale_price = calc.calculate_average_sale_price(keyword_data)
-            keyword_range_sale_price = calc.calculate_range_sale_price(keyword_data)
 
             context = {
                 "garment_brand": garment_brand,
@@ -75,13 +67,26 @@ def search_result(request):
                 "avg_sale_price": avg_sale_price,
                 "range_sale_price": range_sale_price,
                 "avg_list_price_reduction": avg_list_price_reduction,
-                "eighty_percent_category": eighty_percent_category,
-                "keyword": garment_keyword,
-                "keyword_data": keyword_data,
-                "keyword_total_results": len(keyword_data),
-                "keyword_avg_sale_price": keyword_avg_sale_price,
-                "keyword_range_sale_price": keyword_range_sale_price,
+                "eighty_percent_category": eighty_percent_category   
             }
+
+            if garment_keyword is not None: 
+                keyword_data = SoldItemsWomen.objects.filter(
+                    Q(brand_name=garment_brand.upper()),
+                    Q(category=garment_category),
+                    Q(name__contains=garment_keyword.upper()),
+                )
+                
+                keyword_avg_sale_price = calc.calculate_average_sale_price(keyword_data)
+                keyword_range_sale_price = calc.calculate_range_sale_price(keyword_data)
+                
+                context.update({
+                    "keyword": garment_keyword,
+                    "keyword_data": keyword_data,
+                    "keyword_total_results": len(keyword_data),
+                    "keyword_avg_sale_price": keyword_avg_sale_price,
+                    "keyword_range_sale_price": keyword_range_sale_price
+                })
 
         else:
             context = {

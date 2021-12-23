@@ -1,4 +1,5 @@
-import math
+# Helper functions to reduce the size of views
+
 
 def calculate_average_sale_price(data):
     if len(data)>0:
