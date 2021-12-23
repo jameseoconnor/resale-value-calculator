@@ -6,13 +6,25 @@
 html,
 body {
   height: 100%;
-  background-color: #4151e2;
+  background-color: #5463e6;
 }
 
 body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+a {
+  color: white;
+}
+
+a:hover {
+  color: #15db95;
 }
 
 body .content {
@@ -215,6 +227,10 @@ fieldset {
   background-color: #080f5b;
 }
 
+.new-search {
+  background-color: #080f5b;
+}
+
 .search-results {
   font-size: 20px;
   color: white;
@@ -226,7 +242,7 @@ div .center {
 }
 .left-right-container {
   padding: 45px;
-  background-color: #4151e2;
+  background-color: #5463e6;
 }
 
 /* Color Palette */
@@ -297,4 +313,9 @@ td {
 
 .text-shadow {
     text-shadow: 2px 2px #080f5b;
+}
+
+.text-decoration {
+  text-decoration: underline;
+  text-decoration-color: #15db95;
 }
